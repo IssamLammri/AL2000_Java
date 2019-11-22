@@ -28,27 +28,12 @@ public class test {
 		UpdateArrayListDVD();
 		
 		Catalogue C = new Catalogue(1);
+//		C.ajouterFilms(Fi);
 		C.AfficherFicherFilm();
-		ArrayList<String> acteurs= new ArrayList();
-		acteurs.add("Issam");
-		acteurs.add("Moammed");
-		acteurs.add("Mira");
-		acteurs.add("Imane");
-		ArrayList<String> Realisateur= new ArrayList();
-		Realisateur.add("Moudir");
-		Realisateur.add("MohammedJElfa");
-		Realisateur.add("Xubie");
-		LocalTime now = LocalTime.of(3, 22);
-		ArrayList<String> Genre= new ArrayList();
-		Realisateur.add("Enfant");
-		Realisateur.add("Actions");
-		SimpleDateFormat formater = null;
-	    Date aujourdhui = new Date();
-	System.out.println("------------Bonjour------------");
-
-//	    Film F = new Film("Palastine",acteurs,Realisateur,now,Genre,4,"Algérienne",aujourdhui);
-//	    C.ajouterFilms(F);
-//	    C.AfficherFicherFilm();
+		
+		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
+		Ad.Ajouter_Film_Catalogue();
+		C.AfficherFicherFilm();
 		
 
 		
