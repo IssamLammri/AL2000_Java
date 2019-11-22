@@ -14,6 +14,10 @@ public class Catalogue {
 	public Catalogue(int num_Catalogue) {
 		//super();
 		this.num_Catalogue = num_Catalogue;
+		ArrayList<Film> Films_Tous = new ArrayList<>();
+		Film F = new Film();
+		Films_Tous= F.GetAllFilms();
+		this.Films = Films_Tous ;
 	}
 
 	/**
@@ -42,6 +46,9 @@ public class Catalogue {
 	 */
 	public void ajouterFilms(Film fl) {
 		this.Films.add(fl);
+		Film F = new Film();
+		F.Films = this.Films;
+		F.SerializableFilms();
 	}
 	
 	/**
