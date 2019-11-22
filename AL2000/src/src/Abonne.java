@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class Abonne extends Client implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int ID_Abonne;
 	private String Password;
 	private int NB_location = 0;
@@ -191,7 +192,7 @@ public class Abonne extends Client implements Serializable {
 	/**
 	 * fonction qui rend le film dans l'AL2000
 	 */
-	public void Rendre_DVD_A(DVD dvd, int NumeroLoca) {
+	public void Rendre_DVD_A(int NumeroLoca) {
 		Scanner sc = new Scanner(System.in);
 		Location l = new Location();
 		ArrayList<Location> Locations = l.getLocations();
@@ -210,7 +211,7 @@ public class Abonne extends Client implements Serializable {
 				}
 				if (choix == 1) {
 					System.out.println("vous avez choisit paiement par Carte Bancaire ");
-					this.Rendre_DVD(dvd, NumeroLoca);
+					this.Rendre_DVD(NumeroLoca);
 				} else {
 					System.out.println("vous avez choisit paiement par Carte Abonnement");
 					if (CartesAbonnements.size() == 1)
@@ -235,8 +236,8 @@ public class Abonne extends Client implements Serializable {
 							}
 						}
 					}
-					System.out.println("dvd quantite : " + dvd.getQuantite());
-					dvd.setQuantite(dvd.getQuantite() + 1);
+					System.out.println("dvd quantite : " + location.getDvd().getQuantite());
+					location.getDvd().setQuantite(location.getDvd().getQuantite() + 1);
 					location.SerializableLocations();
 				}
 				// functionUpdateAL2000();

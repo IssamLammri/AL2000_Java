@@ -46,7 +46,7 @@ public class DVD implements Serializable {
 	public void setDVD(ArrayList<DVD> dvdExi) {
 		dvd = dvdExi;
 	}
-	
+
 	/**
 	 * @return the film
 	 */
@@ -88,7 +88,7 @@ public class DVD implements Serializable {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
-	
+
 	public void SerializableDVD() {
 		try {
 			FileOutputStream fos = new FileOutputStream("./DVD.ser");
@@ -100,8 +100,7 @@ public class DVD implements Serializable {
 			ioe.printStackTrace();
 		}
 	}
-	
-	
+
 	public ArrayList<DVD> GetAlldvd() {
 		ArrayList<DVD> Listes_dvd = new ArrayList<>();
 		try {
@@ -123,7 +122,6 @@ public class DVD implements Serializable {
 
 		return Listes_dvd;
 	}
-	
 
 	@Override
 	public String toString() {

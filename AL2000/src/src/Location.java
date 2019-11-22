@@ -18,8 +18,8 @@ public class Location implements Serializable {
 	private int Prix_Location;
 	private Client Client;
 	private DVD dvd;
-	private static int count = 0;
 	public static ArrayList<Location> Locations = new ArrayList<>();
+	private static int count ;
 
 	/**
 	 * @param numero_Location
@@ -29,7 +29,8 @@ public class Location implements Serializable {
 	 * @param prix_Location
 	 */
 	public Location(Date date_Location, Date date_Rendu, boolean abonne, int prix_Location, Client clie, DVD dvd_l) {
-		this.numero_Location = count++;
+		count = Locations.size();
+		this.numero_Location = ++count;
 		Date_Location = date_Location;
 		Date_Rendu = date_Rendu;
 		Abonne = abonne;

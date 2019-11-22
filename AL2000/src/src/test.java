@@ -22,6 +22,10 @@ public class test {
 		cal1.set(2022, 7, 21);
 		Date uneDate2 = cal1.getTime();
 
+		UpdateArrayListClients();
+		UpdateArrayListLocations();
+		UpdateArrayListDVD();
+
 		int choix = 0;
 
 		System.out.println("------------Bonjour------------");
@@ -48,6 +52,21 @@ public class test {
 				System.out.println("	5 =>  Revenir au menu Principal		");
 
 				choix1 = Integer.parseInt(sc.nextLine());
+				if (choix1 == 5) {
+					System.out.println(choix);
+					System.out.println("------------Bonjour------------");
+					System.out.println("Veuillez choisir votre moyen d'accés à notre application ");
+
+					System.out.println("	1 =>  Client ");
+					System.out.println("	2 =>  Abonné ");
+					System.out.println("	3 =>  Clients(Abonnés) ");
+					System.out.println("	4 =>  Les Locations ");
+					System.out.println("	5 =>  Les DVD(s) ");
+					System.out.println("	6 =>  Les Films ");
+					System.out.println("	99 =>  Quitter l'application ");
+
+					choix = Integer.parseInt(sc.nextLine());
+				}
 				while (choix1 != 5) {
 					System.out.println(choix1);
 					if (choix1 == 1) {
@@ -61,58 +80,12 @@ public class test {
 						System.out.println(
 								"  Afin de louer un Film , il faut tout d'abord que vous remplissez vos données  :: ");
 						System.out.println("  Commençant par la carte Bancaire :: ");
-						String TitulaireCarte;
-						int cvv;
-						Date date = null;
-						Double Montant;
-						System.out.println(" Veuillez Insérer Le titulaire de la carte ");
-						TitulaireCarte = sc.nextLine();
-						System.out.println("Saisissez une date (JJ/MM/AAAA) :");
-						String str = sc.nextLine();
-						boolean etat = false;
 
-						while (etat) {
-							if (str.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
-
-								SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyyy");
-								try {
-									date = f.parse(str);
-									etat = true;
-								} catch (ParseException e) { // TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							} else {
-								System.out.println("Erreur format");
-								str = sc.nextLine();
-							}
-						}
-						System.out.println(" Veuillez Insérer son CVV");
-						cvv = Integer.parseInt(sc.nextLine());
-						System.out.println(" Veuillez Insérer Le Montant de cette Carte ");
-						Montant = Double.parseDouble(sc.nextLine());
-
-						Carte_Bleu cBC = new Carte_Bleu(TitulaireCarte, cvv, date, Montant);
-
-						System.out.println("  Passant à vos propres informations :: ");
-						String Nom;
-						String Prenom;
-						String Adresse;
-						Date DuneDate1;
-						System.out.println(" Veuillez Insérer Votre Nom ");
-						Nom = sc.nextLine();
-						System.out.println(" Veuillez Insérer Votre Prenom ");
-						Prenom = sc.nextLine();
-						System.out.println(" Veuillez Insérer Votre Adresse ");
-						Adresse = sc.nextLine();
-
-						UpdateArrayListClients();
-						UpdateArrayListLocations();
-
-						Client cl = new Client(Nom, Prenom, Adresse, uneDate1, cBC);
+						Client cl = NvClient(sc, uneDate1);
 
 						DVD dvd = new DVD();
 
-						ArrayList<DVD> DVD = dvd.GetAlldvd();
+						ArrayList<DVD> DVD = dvd.getDVD();
 
 						System.out.println("vous trouvez ici tous les DVD Disponible dans AL2000");
 						int i = 1;
@@ -128,14 +101,31 @@ public class test {
 						}
 
 						cl.Louer(DVD.get(NumDVD - 1));
-
+						DVD = dvd.getDVD();
+						dvd.SerializableDVD();
+						cl.SerializableClients();
 						choix1 = 5;
 					} else if (choix1 == 3) {
-
+						System.out.println(
+								"  Afin de S'abonner, il faut tout d'abord que vous remplissez vos données  :: ");
+						System.out.println("  Commençant par la carte Bancaire :: ");
+						Client cl = NvClient(sc, uneDate1);
+						cl.Sabonner();
+						cl.SerializableClients();
+						choix1 = 5;
 					} else if (choix1 == 4) {
-
+						Client cl = new Client();
+						System.out.println("entrez le numéro de votre location : ");
+						int NumeroLoca = Integer.parseInt(sc.nextLine());
+						cl.Rendre_DVD(NumeroLoca);
+						ArrayList<Object> Clients = cl.GetAllClients();
+						for (Object client : Clients) {
+							System.out.println(client);
+						}
+						cl.SerializableClients();
+						choix1 = 5;
 					} else if (choix1 == 5) {
-						break;
+
 					} else {
 						System.out.println(
 								"Veuillez avez entrer un choix invalide :/ , Veuillez réessayer encore une fois : ");
@@ -198,6 +188,60 @@ public class test {
 
 	}
 
+	/**
+	 * @param sc
+	 * @param uneDate1
+	 * @return
+	 */
+	public static Client NvClient(Scanner sc, Date uneDate1) {
+		String TitulaireCarte;
+		int cvv;
+		Date date = null;
+		Double Montant;
+		System.out.println(" Veuillez Insérer Le titulaire de la carte ");
+		TitulaireCarte = sc.nextLine();
+		System.out.println("Saisissez une date (JJ/MM/AAAA) :");
+		String str = sc.nextLine();
+		boolean etat = false;
+
+		while (etat) {
+			if (str.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}")) {
+
+				SimpleDateFormat f = new SimpleDateFormat("MM-dd-yyyy");
+				try {
+					date = f.parse(str);
+					etat = true;
+				} catch (ParseException e) { // TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				System.out.println("Erreur format");
+				str = sc.nextLine();
+			}
+		}
+		System.out.println(" Veuillez Insérer son CVV");
+		cvv = Integer.parseInt(sc.nextLine());
+		System.out.println(" Veuillez Insérer Le Montant de cette Carte ");
+		Montant = Double.parseDouble(sc.nextLine());
+
+		Carte_Bleu cBC = new Carte_Bleu(TitulaireCarte, cvv, date, Montant);
+
+		System.out.println("  Passant à vos propres informations :: ");
+		String Nom;
+		String Prenom;
+		String Adresse;
+		Date DuneDate1;
+		System.out.println(" Veuillez Insérer Votre Nom ");
+		Nom = sc.nextLine();
+		System.out.println(" Veuillez Insérer Votre Prenom ");
+		Prenom = sc.nextLine();
+		System.out.println(" Veuillez Insérer Votre Adresse ");
+		Adresse = sc.nextLine();
+
+		Client cl = new Client(Nom, Prenom, Adresse, uneDate1, cBC);
+		return cl;
+	}
+
 	public static void UpdateArrayListClients() {
 		File newFile = new File("./Clients.ser");
 		if (newFile.length() == 0) {
@@ -218,6 +262,18 @@ public class test {
 			ArrayList<Location> Locations = locationtest.GetAllLocations();
 			if (Locations.size() != 0)
 				locationtest.setLocations(Locations);
+		}
+	}
+
+	public static void UpdateArrayListDVD() {
+		File newFile = new File("./DVD.ser");
+		if (newFile.length() == 0) {
+
+		} else {
+			DVD dvd = new DVD();
+			ArrayList<DVD> dvdExi = dvd.GetAlldvd();
+			if (dvdExi.size() != 0)
+				dvd.setDVD(dvdExi);
 		}
 	}
 

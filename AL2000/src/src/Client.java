@@ -163,10 +163,15 @@ public class Client implements Serializable {
 		if (this.FunctionTestAbon() == true) {
 			if (function_NBLocationParClient() < 3) {
 				if (Function_ExistFILMINAL20000(dvd)) {
-					System.out.println("location pour cet abonné fini avec succés");
-					dvd.setQuantite(dvd.getQuantite() - 1);
-					Location Loc = new Location(date, null, false, 4, this, dvd);
-					Loc.SerializableLocations();
+					if (dvd.getQuantite() > 0) {
+						System.out.println("location pour cet abonné fini avec succés");
+						dvd.setQuantite(dvd.getQuantite() - 1);
+						Location Loc = new Location(date, null, false, 4, this, dvd);
+						Loc.SerializableLocations();
+					} else {
+						System.out.println("Desolé, mais il y en plus , reviens plus tard");
+					}
+
 				} else {
 					System.out.println("Desolé, mais il y en plus , reviens plus tard");
 				}
@@ -176,12 +181,17 @@ public class Client implements Serializable {
 		} else {
 			if (function_NBLocationParClient() == 0) {
 				if (Function_ExistFILMINAL20000(dvd)) {
-					System.out.println("location pour cet client fini avec succés");
-					dvd.setQuantite(dvd.getQuantite() - 1);
-					Location Loc = new Location(date, null, false, 4, this, dvd);
-					Loc.SerializableLocations();
+					if (dvd.getQuantite() > 0) {
+						System.out.println("location pour cet client fini avec succés");
+						dvd.setQuantite(dvd.getQuantite() - 1);
+						Location Loc = new Location(date, null, false, 4, this, dvd);
+						Loc.SerializableLocations();
+					} else {
+						System.out.println("Desolé, mais il reste plus de ce film ");
+					}
+
 				} else {
-					System.out.println("Desolé, mais il y en plus , reviens plus tard");
+					System.out.println("Desolé, mais ce film n'existe plus sur l'AL2000");
 				}
 			} else {
 				System.out.println("vous avez depassé le nombre maximal autorisée pour vos réservation ");
@@ -240,7 +250,7 @@ public class Client implements Serializable {
 
 		if (Locations.size() != 0) {
 			for (Location location : Locations) {
-				if (location.getClient() == this) {
+				if (location.getClient().getCB().getTitulaire_Carte().equals(this.getCB().getTitulaire_Carte())) {
 					if (location.getDate_Rendu() == null) {
 						Nb_LocationEncours++;
 					}
@@ -248,7 +258,7 @@ public class Client implements Serializable {
 			}
 		}
 
-		return 0;
+		return Nb_LocationEncours;
 	}
 
 	/**
@@ -343,7 +353,7 @@ public class Client implements Serializable {
 	/**
 	 * fonction qui rend le film dans l'AL2000
 	 */
-	public void Rendre_DVD(DVD dvd, int NumeroLoca) {
+	public void Rendre_DVD(int NumeroLoca) {
 		Location l = new Location();
 		ArrayList<Location> Locations = l.getLocations();
 		for (Location location : Locations) {
@@ -351,11 +361,9 @@ public class Client implements Serializable {
 				Date date = new Date();
 				double prix = location.Calcule_Prix();
 				location.setDate_Rendu(date);
-				System.out.println("prix : " + this.CB.getMontant());
-				this.CB.setMontant(this.CB.getMontant() - prix);
-				dvd.setQuantite(dvd.getQuantite() + 1);
+				location.getClient().getCB().setMontant(location.getClient().getCB().getMontant() - prix);
+				location.getDvd().setQuantite(location.getDvd().getQuantite() + 1);
 				location.SerializableLocations();
-				SerializableClients();
 				// functionUpdateAL2000();
 			}
 		}

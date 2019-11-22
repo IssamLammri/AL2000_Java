@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Carte_Bleu implements Serializable {
 
-	private static int N_Carte=0;
+	private static int N_Carte = 0;
 	private String Titulaire_Carte;
 	private int CVV;
 	private Date Date_Experation;
@@ -99,8 +99,8 @@ public class Carte_Bleu implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Carte_Bleu [N_Carte=" + N_Carte + ", CVV=" + CVV + ", Date_Experation=" + Date_Experation + ", Montant="
-				+ Montant + "]";
+		return "Carte_Bleu [Titulaire_Carte=" + Titulaire_Carte + ", CVV=" + CVV + ", Date_Experation="
+				+ Date_Experation + ", Montant=" + Montant + "]";
 	}
 
 }
