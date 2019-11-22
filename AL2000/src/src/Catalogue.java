@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Catalogue {
 
 	private int num_Catalogue;
-	public ArrayList<Film> Films = new ArrayList<>();
+	public static ArrayList<Film> Films = new ArrayList<>();
 	
 
 	/**
