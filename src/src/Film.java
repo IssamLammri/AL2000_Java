@@ -69,6 +69,7 @@ public class Film implements Serializable {
 	 */
 	public void setFilms(ArrayList<Film> FilmsExi) {
 		Films = FilmsExi;
+		SerializableFilms();
 	}
 
 	/**

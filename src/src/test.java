@@ -26,14 +26,26 @@ public class test {
 		UpdateArrayListClients();
 		UpdateArrayListLocations();
 		UpdateArrayListDVD();
+		UpdateArrayListFilm();
 		
-		Catalogue C = new Catalogue(1);
-//		C.ajouterFilms(Fi);
-		C.AfficherFicherFilm();
+//		Catalogue C = new Catalogue(1);
+//		C.AfficherFicherFilm();
+//		
+//		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
+//		Ad.Ajouter_Film_Catalogue(C);
+//		//Ad.Supprimer_Film_Catalogue(C);
+//		C.AfficherFicherFilm();
+//		
+//		
+//		ArrayList<Film> FilmEx = new  ArrayList();
+//		 Catalogue C = new Catalogue(1);
+//		 FilmEx = C.getFilms();
+//			System.out.println(FilmEx.get(1).getTitre_Film());
 		
-		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
-		Ad.Ajouter_Film_Catalogue();
-		C.AfficherFicherFilm();
+		
+
+     
+
 		
 
 		

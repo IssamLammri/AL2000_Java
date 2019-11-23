@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Catalogue {
 
 	private int num_Catalogue;
-	public static ArrayList<Film> Films = new ArrayList<>();
+	public  ArrayList<Film> Filmss = new ArrayList<>();
 	
 
 	/**
@@ -17,7 +17,7 @@ public class Catalogue {
 		ArrayList<Film> Films_Tous = new ArrayList<>();
 		Film F = new Film();
 		Films_Tous= F.GetAllFilms();
-		this.Films = Films_Tous ;
+		this.Filmss = Films_Tous ;
 	}
 
 	/**
@@ -38,24 +38,22 @@ public class Catalogue {
 	 * @return the Films
 	 */
 	public ArrayList<Film> getFilms() {
-		return Films;
+		return Filmss;
 	}
 
 	/**
 	 * Ajouter Films
 	 */
 	public void ajouterFilms(Film fl) {
-		this.Films.add(fl);
-		Film F = new Film();
-		F.Films = this.Films;
-		F.SerializableFilms();
+		this.Filmss.add(fl);
 	}
 	
 	/**
 	 * Supprimer Films
 	 */
 	public void supprimerFilms(Film f2) {
-		this.Films.remove(f2);
+		this.Filmss.remove(f2);
+		f2.setFilms(this.Filmss);
 	}
 	
 	/**
@@ -63,7 +61,7 @@ public class Catalogue {
 	 */
 	public void AfficherFicherFilm() 
 	{
-		for(Film e:Films)
+		for(Film e:Filmss)
 		      System.out.println(e);
 	}
 }
