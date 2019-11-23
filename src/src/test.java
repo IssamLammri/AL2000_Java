@@ -27,15 +27,42 @@ public class test {
 		UpdateArrayListLocations();
 		UpdateArrayListDVD();
 		UpdateArrayListFilm();
+		UpdateArrayListDemandesFilm();
 		
-//		Catalogue C = new Catalogue(1);
-//		C.AfficherFicherFilm();
+		// pour tester la methode de damnde de film pour abooner 
+		Catalogue C = new Catalogue(1);
+		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
+		//Ad.Ajouter_Film_Catalogue(C);
+		
+//		Catalogue C2 = new Catalogue(2,2);
+//		C2.AfficherFicherFilm();
+//		System.out.println("----------- ");
+//
+//		Carte_Bleu cBC = new Carte_Bleu("ISSAM LAMMRI", 553, uneDate1, 100);
+//		ArrayList<String> genre = new ArrayList();
+//		genre.add("enfant");
+//		genre.add("Action");
+//		Carte_Abonnement CA = new Carte_Abonnement(genre,100);
+//		Abonne A =new Abonne("Lammrii","Issaml","bba logemnet",uneDate1,cBC,"KKKK",uneDate1,CA);
+//		A.DemanderFilm(C);
 //		
+		
+		
+		
+		
+		
+		//Catalogue C2 = new Catalogue(2,2);
+//		C2.AfficherFicherFilm();
+		
 //		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
 //		Ad.Ajouter_Film_Catalogue(C);
-//		//Ad.Supprimer_Film_Catalogue(C);
+		//Ad.Supprimer_Film_Catalogue(C);
+		//Ad.ConsulterDemandesFilms();
+		Ad.SupprimerFilmDemnder();
 //		C.AfficherFicherFilm();
-//		
+//		ArrayList<Film> FilmDemander = new  ArrayList();
+//		System.out.println(FilmDemander);
+		
 //		
 //		ArrayList<Film> FilmEx = new  ArrayList();
 //		 Catalogue C = new Catalogue(1);
@@ -316,6 +343,19 @@ public class test {
 			ArrayList<Film> films = film.GetAllFilms();
 			if (films.size() != 0) {
 				film.setFilms(films);
+			}		
+		}
+	}
+	
+	public static void UpdateArrayListDemandesFilm() {
+		File newFile = new File("./DemandesFilms.ser");
+		if (newFile.length() == 0) {
+
+		} else {
+			Film film= new Film();
+			ArrayList<Film> films = film.GetAllDemandesFilms();
+			if (films.size() != 0) {
+				film.setDemandesFilms(films);
 			}		
 		}
 	}

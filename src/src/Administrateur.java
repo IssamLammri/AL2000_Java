@@ -127,7 +127,8 @@ public class Administrateur extends Employe{
 		FilmEx = C.getFilms();
 		boolean Test = true;
 		while (Test == true) {
-			System.out.println("Vous Voulez supprimer quel Films ? ");
+			System.out.println();
+			System.out.println("Vous Voulez supprimer quel Films ? ");System.out.println();
 			for (int i=0; i<FilmEx.size();i++) {
 				System.out.println("Film N° --  "+(i+1)+"  --   "+FilmEx.get(i).getTitre_Film());
 			}		
@@ -136,7 +137,7 @@ public class Administrateur extends Employe{
 			int NFilmTest = Integer.parseInt(sc.nextLine());
 			while ( 0 >= NFilmTest || NFilmTest >FilmEx.size() ) {
 				System.out.println("Merci d'avoir choisi le bon numéro ");
-				 NFilmTest = Integer.parseInt(sc.nextLine());
+				NFilmTest = Integer.parseInt(sc.nextLine());
 			}
 			System.out.println("Vous Voulez supprimer le Film : "+FilmEx.get(NFilmTest-1).getTitre_Film());
 			System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
@@ -150,6 +151,80 @@ public class Administrateur extends Employe{
 		}
 
 
+	}
+	public ArrayList<Film> ConsulterDemandesFilms() {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Film> DemandesFilm = new  ArrayList();
+		ArrayList<Film> DemandesFilmTree = new  ArrayList();
+		ArrayList<Integer> NombreOccurance = new  ArrayList();
+		Catalogue C = new Catalogue(1,1);
+		DemandesFilm = C.getFilms();
+		boolean Test;
+		DemandesFilmTree.add(DemandesFilm.get(0));
+		NombreOccurance.add(1);
+		int cmp;
+		for (int i=0;i<DemandesFilm.size();i++) {
+			cmp = 0;Test = true;
+			for (int j=i;j<DemandesFilm.size();j++) {
+				if (DemandesFilm.get(i).getTitre_Film().equals(DemandesFilm.get(j).getTitre_Film())){
+					cmp =cmp+1 ;
+				}
+			}
+			for (int k=0 ;k<DemandesFilmTree.size();k++) {
+				if (DemandesFilm.get(i).getTitre_Film().equals(DemandesFilmTree.get(k).getTitre_Film())) {
+					Test = false;
+				}
+			}
+			if (Test==true) {
+				DemandesFilmTree.add(DemandesFilm.get(i));	
+				NombreOccurance.add(cmp);
+			}
+		}
+		int f =0;
+		System.out.println("---------|---------|------------------------|");
+		System.out.println("-N° Film | N° Fois |  Le Nom de Film        |");
+		System.out.println("---------|---------|------------------------|");
+		int a =1;
+		for(Film e:DemandesFilmTree) {
+			System.out.println("    "+a+"    |    "+NombreOccurance.get(f)+"    |  "+e.getTitre_Film()+"        ");
+			System.out.println("---------|---------|------------------------|");		
+			f++;
+			a++;
+		}
+		return  DemandesFilmTree;
+	}
+	
+	public void SupprimerFilmDemnder() {
+		Catalogue C = new Catalogue(1,1);
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Film> FilmEx = new  ArrayList();
+		ArrayList<Film> Filmtree = new  ArrayList();
+		FilmEx = C.getFilms();
+		System.out.println();
+		System.out.println("Vous Voulez supprimer quel Films ? ");System.out.println();
+		Filmtree=this.ConsulterDemandesFilms();
+		System.out.println(" --- ");
+		System.out.println("Taper Le N° de Film ");
+		int NFilmTest = Integer.parseInt(sc.nextLine());
+		while ( 0 >= NFilmTest || NFilmTest >Filmtree.size() ) {
+			System.out.println("Merci d'avoir choisi le bon numéro ");
+			NFilmTest = Integer.parseInt(sc.nextLine());
+		}
+		System.out.println("Vous Voulez supprimer le Film : "+Filmtree.get(NFilmTest-1).getTitre_Film());
+		System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
+		int T =Integer.parseInt(sc.nextLine());
+		if (T==1) {
+			for (int k=0 ;k<FilmEx.size();k++) {
+				if (Filmtree.get(NFilmTest-1).getTitre_Film().equals(FilmEx.get(k).getTitre_Film())) {
+					C.supprimerDemandesFilms(FilmEx.get(k));
+					//FilmEx.remove(FilmEx.get(k));
+					k--;
+				}
+			}
+		}else {
+			System.out.println("Merci d'avoir choisi le bon numéro ");
+		}
+		this.ConsulterDemandesFilms();
 	}
 	public void AjouterDVD(ArrayList<DVD> Ldvd,DVD newDVD){
 		int QTTdvd=0;

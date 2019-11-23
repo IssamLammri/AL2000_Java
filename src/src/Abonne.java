@@ -177,8 +177,35 @@ public class Abonne extends Client implements Serializable {
 	/**
 	 * Consulter la liste des locations
 	 */
-	public void DemanderFilm() {
-
+	public void DemanderFilm(Catalogue C) {
+		Scanner sc = new Scanner(System.in);
+		ArrayList<Film> FilmEx = new  ArrayList();
+		ArrayList<Film> FilmDemander = new  ArrayList();
+		FilmEx = C.getFilms();
+		boolean Test = true;
+		while (Test == true) {
+			System.out.println("Vous Voulez Demander quel Films ? ");
+			for (int i=0; i<FilmEx.size();i++) {
+				System.out.println("Film N° --  "+(i+1)+"  --   "+FilmEx.get(i).getTitre_Film());
+			}		
+			System.out.println(" --- ");
+			System.out.println("Taper Le N° de Film ");
+			int NFilmTest = Integer.parseInt(sc.nextLine());
+			while ( 0 >= NFilmTest || NFilmTest >FilmEx.size() ) {
+				System.out.println("Merci d'avoir choisi le bon numéro ");
+				 NFilmTest = Integer.parseInt(sc.nextLine());
+			}
+			System.out.println("Vous Voulez Demander le Film : "+FilmEx.get(NFilmTest-1).getTitre_Film());
+			System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
+			int T =Integer.parseInt(sc.nextLine());
+			if (T==1) {
+				FilmDemander.add(FilmEx.get(NFilmTest-1));
+				FilmEx.get(NFilmTest-1).AjouterDansDemandesFilms(FilmDemander);
+				Test = false;
+			}else {
+				System.out.println("Merci d'avoir choisi le bon numéro ");
+			}
+		}
 	}
 
 	public void Louer(DVD dvd) {

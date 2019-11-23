@@ -63,13 +63,30 @@ public class Film implements Serializable {
 	public ArrayList<Film> getDVD() {
 		return Films;
 	}
-	
+
 	/**
 	 * set the arraylist
 	 */
 	public void setFilms(ArrayList<Film> FilmsExi) {
 		Films = FilmsExi;
 		SerializableFilms();
+	}
+	
+	
+	public void AjouterDansDemandesFilms(ArrayList<Film> FilmsExi) {
+		Films = this.GetAllDemandesFilms();
+		for(Film e:FilmsExi) {
+			Films.add(e);
+		}
+		SerializableDemandesFilms();
+		
+	}
+	/**
+	 * set the arraylist
+	 */
+	public void setDemandesFilms(ArrayList<Film> FilmsExi) {
+		Films = FilmsExi;
+		SerializableDemandesFilms();
 	}
 
 	/**
@@ -195,11 +212,45 @@ public class Film implements Serializable {
 			ioe.printStackTrace();
 		}
 	}
+	public void SerializableDemandesFilms() {
+		try {
+			FileOutputStream fos = new FileOutputStream("./DemandesFilms.ser");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(Films);
+			oos.close();
+			fos.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
 
 	public ArrayList<Film> GetAllFilms() {
+
 		ArrayList<Film> Listes_Films = new ArrayList<>();
 		try {
 			FileInputStream fis = new FileInputStream("./Films.ser");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			Listes_Films = (ArrayList) ois.readObject();
+
+			ois.close();
+			fis.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException c) {
+			System.out.println("Class not found");
+			c.printStackTrace();
+			return null;
+		}
+
+		return Listes_Films;
+	}
+	public ArrayList<Film> GetAllDemandesFilms() {
+
+		ArrayList<Film> Listes_Films = new ArrayList<>();
+		try {
+			FileInputStream fis = new FileInputStream("./DemandesFilms.ser");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			Listes_Films = (ArrayList) ois.readObject();

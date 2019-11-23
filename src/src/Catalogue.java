@@ -19,6 +19,14 @@ public class Catalogue {
 		Films_Tous= F.GetAllFilms();
 		this.Filmss = Films_Tous ;
 	}
+	public Catalogue(int num_Catalogue,int a) {
+		//super();
+		this.num_Catalogue = num_Catalogue;
+		ArrayList<Film> Films_Tous = new ArrayList<>();
+		Film F = new Film();
+		Films_Tous= F.GetAllDemandesFilms();
+		this.Filmss = Films_Tous ;
+	}
 
 	/**
 	 * @return the num_Catalogue
@@ -54,6 +62,13 @@ public class Catalogue {
 	public void supprimerFilms(Film f2) {
 		this.Filmss.remove(f2);
 		f2.setFilms(this.Filmss);
+	}
+	/**
+	 * Supprimer Films
+	 */
+	public void supprimerDemandesFilms(Film f2) {
+		this.Filmss.remove(f2);
+		f2.setDemandesFilms(this.Filmss);
 	}
 	
 	/**
