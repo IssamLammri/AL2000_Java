@@ -29,10 +29,31 @@ public class test {
 		UpdateArrayListFilm();
 		UpdateArrayListDemandesFilm();
 		
+//		AL2000 A = new AL2000(1,"bba","kdksldqs");
+//		
+//		System.out.println("-----------  la quntité des dvd est :  "+A.GetNombreDVDTotal());
+
+		
+		// pour tester La Location 
+//		Date date_L = null ;
+//		Date date_R = null ;
+//		Client client = new Client();
+//		DVD dvd = new DVD();
+//		Location L = new Location(date_L,date_R,false,5,client,dvd);
+//		 date_R = new Date();
+//
+//	    DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+//	        DateFormat.SHORT,
+//	        DateFormat.SHORT);
+//		Location L1 = new Location(date_L,date_R,false,5,client,dvd);
 		// pour tester la methode de damnde de film pour abooner 
-		Catalogue C = new Catalogue(1);
+//		Catalogue C = new Catalogue(1);
 		Administrateur Ad = new Administrateur(" ISSAM", "Lammri ", " BBA ", "34000");
+//		Ad.RécupérerNombreDVDLouerAc();
+		System.out.println("-----------  la quntité des dvd est :  "+Ad.RécupérerNombreDVDLouerAc());
 		//Ad.Ajouter_Film_Catalogue(C);
+		
+		
 		
 //		Catalogue C2 = new Catalogue(2,2);
 //		C2.AfficherFicherFilm();
@@ -43,9 +64,9 @@ public class test {
 //		genre.add("enfant");
 //		genre.add("Action");
 //		Carte_Abonnement CA = new Carte_Abonnement(genre,100);
+//		
 //		Abonne A =new Abonne("Lammrii","Issaml","bba logemnet",uneDate1,cBC,"KKKK",uneDate1,CA);
 //		A.DemanderFilm(C);
-//		
 		
 		
 		
@@ -58,7 +79,7 @@ public class test {
 //		Ad.Ajouter_Film_Catalogue(C);
 		//Ad.Supprimer_Film_Catalogue(C);
 		//Ad.ConsulterDemandesFilms();
-		Ad.SupprimerFilmDemnder();
+		//Ad.SupprimerFilmDemnder();
 //		C.AfficherFicherFilm();
 //		ArrayList<Film> FilmDemander = new  ArrayList();
 //		System.out.println(FilmDemander);

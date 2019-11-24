@@ -201,6 +201,9 @@ public class Administrateur extends Employe{
 		ArrayList<Film> Filmtree = new  ArrayList();
 		FilmEx = C.getFilms();
 		System.out.println();
+		System.out.println("Si Vous Voulez supprimer un Film Taper '1' et Si cous Voulez vider la table Taper '0' ? ");System.out.println();
+
+		System.out.println();
 		System.out.println("Vous Voulez supprimer quel Films ? ");System.out.println();
 		Filmtree=this.ConsulterDemandesFilms();
 		System.out.println(" --- ");
@@ -210,14 +213,13 @@ public class Administrateur extends Employe{
 			System.out.println("Merci d'avoir choisi le bon numéro ");
 			NFilmTest = Integer.parseInt(sc.nextLine());
 		}
-		System.out.println("Vous Voulez supprimer le Film : "+Filmtree.get(NFilmTest-1).getTitre_Film());
+		System.out.println("  ----->  Vous Voulez supprimer le Film :    "+Filmtree.get(NFilmTest-1).getTitre_Film());
 		System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
 		int T =Integer.parseInt(sc.nextLine());
 		if (T==1) {
 			for (int k=0 ;k<FilmEx.size();k++) {
 				if (Filmtree.get(NFilmTest-1).getTitre_Film().equals(FilmEx.get(k).getTitre_Film())) {
 					C.supprimerDemandesFilms(FilmEx.get(k));
-					//FilmEx.remove(FilmEx.get(k));
 					k--;
 				}
 			}
@@ -225,6 +227,25 @@ public class Administrateur extends Employe{
 			System.out.println("Merci d'avoir choisi le bon numéro ");
 		}
 		this.ConsulterDemandesFilms();
+	}
+	
+	public void ValiderLaMiseAJour() {
+		
+	}
+	
+	
+	public int RécupérerNombreDVDLouerAc() {
+		ArrayList<Location> Loca = new  ArrayList();
+		Location L = new Location();
+		Loca = L.GetAllLocations();
+		System.out.println("les location sont"+Loca);
+		int Quantite =0 ;
+		for(Location e:Loca) {
+			if(e.getDate_Rendu()==null) {
+				Quantite= Quantite+1;
+			}
+		}
+		return 0;
 	}
 	public void AjouterDVD(ArrayList<DVD> Ldvd,DVD newDVD){
 		int QTTdvd=0;

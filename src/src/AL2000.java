@@ -1,12 +1,13 @@
 package src;
 
+import java.util.ArrayList;
 
 public class AL2000 {
-	
+
 	private int num_machine;
 	private String ville;
 	private String Adresse;
-	
+
 	/**
 	 * @param num_machine
 	 * @param ville
@@ -60,5 +61,19 @@ public class AL2000 {
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
 	}
-	
+
+	public int GetNombreDVDTotal() {
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDExist =D.GetAlldvd();
+		int Quantite =0;
+		for(DVD e:DVDExist) {
+			if(e.isExiste()) {
+				Quantite= Quantite+e.getQuantite();
+			}
+		}
+
+		return Quantite;
+	}
+
 }

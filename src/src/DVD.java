@@ -28,6 +28,7 @@ public class DVD implements Serializable {
 		dvd.add(this);
 		SerializableDVD();
 	}
+	
 
 	public DVD() {
 		// TODO Auto-generated constructor stub
