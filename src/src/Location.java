@@ -1,5 +1,6 @@
 package src;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -63,6 +64,10 @@ public class Location implements Serializable {
 	public ArrayList<Location> GetAllLocations() {
 		ArrayList<Location> Listes_Locations = new ArrayList<>();
 		try {
+			File newFile = new File("./Locations.ser");
+			if (newFile.length() == 0) {
+				return null;
+			} else {
 			FileInputStream fis = new FileInputStream("./Locations.ser");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
@@ -70,6 +75,7 @@ public class Location implements Serializable {
 
 			ois.close();
 			fis.close();
+			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 			return null;

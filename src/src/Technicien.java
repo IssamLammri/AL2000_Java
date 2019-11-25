@@ -1,5 +1,8 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Technicien extends Employe {
 
 	private int num_tech;
@@ -32,8 +35,21 @@ public class Technicien extends Employe {
 	/**
 	 * mettre à jour AL2000
 	 */
-	public void mise_a_jour() {
-
+	public void appliquer_jour_mise_a_jour() {
+		ArrayList<DVD> dvd = new  ArrayList();
+		AL2000 Al = new AL2000(2,"kk","dd");
+		Scanner sc = new Scanner(System.in);
+		dvd = Al.GetLaListeDVDExist();
+		dvd =Al.GetMiseAjour();
+		System.out.println("------ Vous Devez Appliquer cette mise a jour Sur La machine ------ ");
 	}
+	public void Récupéré_mise_a_jour() {
+		ArrayList<DVD> dvd = new  ArrayList();
+		AL2000 Al = new AL2000(2,"kk","dd");
+		Scanner sc = new Scanner(System.in);
+		dvd = Al.GetMiseAjour();
+		
+	}
+	
 
 }

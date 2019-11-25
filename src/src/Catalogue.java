@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Catalogue {
 
 	private int num_Catalogue;
-	public  ArrayList<Film> Filmss = new ArrayList<>();
+	public static ArrayList<Film> Filmss = new ArrayList<>();
 	
 
 	/**
@@ -68,7 +68,7 @@ public class Catalogue {
 	 */
 	public void supprimerDemandesFilms(Film f2) {
 		this.Filmss.remove(f2);
-		f2.setDemandesFilms(this.Filmss);
+		f2.setDemandesFilms(Filmss);
 	}
 	
 	/**
@@ -76,7 +76,14 @@ public class Catalogue {
 	 */
 	public void AfficherFicherFilm() 
 	{
-		for(Film e:Filmss)
-		      System.out.println(e);
+		System.out.println("---------||------------------------|");
+		System.out.println("-N° Film ||  Le Nom de Film        |");
+		System.out.println("---------||------------------------|");
+		int a =1;
+		for(Film e:Filmss) {
+			System.out.println("    "+a+"    ||  "+e.getTitre_Film()+"        ");
+			System.out.println("---------||------------------------|");		
+			a++;
+		}
 	}
 }

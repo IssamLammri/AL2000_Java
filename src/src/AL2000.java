@@ -75,5 +75,34 @@ public class AL2000 {
 
 		return Quantite;
 	}
+	public  ArrayList<DVD> GetLaListeDVDExist(){
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDExist =D.GetAlldvd();
+		System.out.println("---------|--------- |------------------------|");
+		System.out.println(" N° DVD  | Quantité |  Le Nom de Film        |");
+		System.out.println("---------|--------- |------------------------|");
+		int a =1;
+		for(DVD e:DVDExist) {
+			if(e.isExiste()) {
+				System.out.println("    "+a+"    |     "+e.getQuantite()+"   |  "+e.getFilm().getTitre_Film()+"        ");
+				System.out.println("---------|--------- |------------------------|");		
+				
+				a++;
+			}
+			
+		}
+
+		return DVDExist;
+	}
+	public  ArrayList<DVD> GetMiseAjour(){
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDExist =D.GetAllMiseAJourdvd();
+		
+
+		return DVDExist;
+	}
+	
 
 }

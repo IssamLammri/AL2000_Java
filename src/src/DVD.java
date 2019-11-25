@@ -101,11 +101,43 @@ public class DVD implements Serializable {
 			ioe.printStackTrace();
 		}
 	}
+	public void SerializableMiseAJourDVD() {
+		try {
+			FileOutputStream fos = new FileOutputStream("./DVDMiseAjour.ser");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(dvd);
+			oos.close();
+			fos.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
 
 	public ArrayList<DVD> GetAlldvd() {
 		ArrayList<DVD> Listes_dvd = new ArrayList<>();
 		try {
 			FileInputStream fis = new FileInputStream("./DVD.ser");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			Listes_dvd = (ArrayList) ois.readObject();
+
+			ois.close();
+			fis.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException c) {
+			System.out.println("Class not found");
+			c.printStackTrace();
+			return null;
+		}
+
+		return Listes_dvd;
+	}
+	public ArrayList<DVD> GetAllMiseAJourdvd() {
+		ArrayList<DVD> Listes_dvd = new ArrayList<>();
+		try {
+			FileInputStream fis = new FileInputStream("./DVDMiseAjour.ser");
 			ObjectInputStream ois = new ObjectInputStream(fis);
 
 			Listes_dvd = (ArrayList) ois.readObject();

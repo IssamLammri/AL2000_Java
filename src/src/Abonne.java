@@ -173,9 +173,14 @@ public class Abonne extends Client implements Serializable {
 		}
 		return Locations;
 	}
+	
+	
+	public void ConsulterLesFilmsCatalogie(Catalogue c) {
+		c.AfficherFicherFilm();
+	}
 
 	/**
-	 * Consulter la liste des locations
+	 * Demande un film
 	 */
 	public void DemanderFilm(Catalogue C) {
 		Scanner sc = new Scanner(System.in);

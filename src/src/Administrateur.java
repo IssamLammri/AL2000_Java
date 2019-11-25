@@ -2,7 +2,9 @@ package src;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -117,7 +119,7 @@ public class Administrateur extends Employe{
 		}
 
 		Film Fi = new Film(TitulaireFilm,acteurs,Realisateurs,now,Genre,E,N,date);
-		C.ajouterFilms(Fi);
+//		C.ajouterFilms(Fi);
 	}
 
 
@@ -149,9 +151,8 @@ public class Administrateur extends Employe{
 				System.out.println("Merci d'avoir choisi le bon numéro ");
 			}
 		}
-
-
 	}
+
 	public ArrayList<Film> ConsulterDemandesFilms() {
 		Scanner sc = new Scanner(System.in);
 		ArrayList<Film> DemandesFilm = new  ArrayList();
@@ -161,7 +162,7 @@ public class Administrateur extends Employe{
 		DemandesFilm = C.getFilms();
 		boolean Test;
 		DemandesFilmTree.add(DemandesFilm.get(0));
-		NombreOccurance.add(1);
+		
 		int cmp;
 		for (int i=0;i<DemandesFilm.size();i++) {
 			cmp = 0;Test = true;
@@ -170,11 +171,15 @@ public class Administrateur extends Employe{
 					cmp =cmp+1 ;
 				}
 			}
+			
 			for (int k=0 ;k<DemandesFilmTree.size();k++) {
 				if (DemandesFilm.get(i).getTitre_Film().equals(DemandesFilmTree.get(k).getTitre_Film())) {
 					Test = false;
 				}
 			}
+			if(i==0) {
+				NombreOccurance.add(cmp);
+			}else
 			if (Test==true) {
 				DemandesFilmTree.add(DemandesFilm.get(i));	
 				NombreOccurance.add(cmp);
@@ -193,60 +198,144 @@ public class Administrateur extends Employe{
 		}
 		return  DemandesFilmTree;
 	}
-	
+
 	public void SupprimerFilmDemnder() {
 		Catalogue C = new Catalogue(1,1);
 		Scanner sc = new Scanner(System.in);
 		ArrayList<Film> FilmEx = new  ArrayList();
 		ArrayList<Film> Filmtree = new  ArrayList();
+		ArrayList<Film> FilmEXN = new  ArrayList();
 		FilmEx = C.getFilms();
 		System.out.println();
 		System.out.println("Si Vous Voulez supprimer un Film Taper '1' et Si cous Voulez vider la table Taper '0' ? ");System.out.println();
-
-		System.out.println();
-		System.out.println("Vous Voulez supprimer quel Films ? ");System.out.println();
-		Filmtree=this.ConsulterDemandesFilms();
-		System.out.println(" --- ");
-		System.out.println("Taper Le N° de Film ");
-		int NFilmTest = Integer.parseInt(sc.nextLine());
-		while ( 0 >= NFilmTest || NFilmTest >Filmtree.size() ) {
-			System.out.println("Merci d'avoir choisi le bon numéro ");
-			NFilmTest = Integer.parseInt(sc.nextLine());
-		}
-		System.out.println("  ----->  Vous Voulez supprimer le Film :    "+Filmtree.get(NFilmTest-1).getTitre_Film());
-		System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
-		int T =Integer.parseInt(sc.nextLine());
-		if (T==1) {
-			for (int k=0 ;k<FilmEx.size();k++) {
-				if (Filmtree.get(NFilmTest-1).getTitre_Film().equals(FilmEx.get(k).getTitre_Film())) {
-					C.supprimerDemandesFilms(FilmEx.get(k));
-					k--;
-				}
+		int TestSup = Integer.parseInt(sc.nextLine());
+		if(TestSup==1) {
+			System.out.println();
+			System.out.println("Vous Voulez supprimer quel Films ? ");System.out.println();
+			Filmtree=this.ConsulterDemandesFilms();
+			System.out.println(" --- ");
+			System.out.println("Taper Le N° de Film ");
+			int NFilmTest = Integer.parseInt(sc.nextLine());
+			while ( 0 >= NFilmTest || NFilmTest >Filmtree.size() ) {
+				System.out.println("Merci d'avoir choisi le bon numéro ");
+				NFilmTest = Integer.parseInt(sc.nextLine());
+			}
+			System.out.println("  ----->  Vous Voulez supprimer le Film :    "+Filmtree.get(NFilmTest-1).getTitre_Film());
+			System.out.println("Si OUI Taper ---  ' 1 ' Sinon Taper ' 0 ' ");
+			int T =Integer.parseInt(sc.nextLine());
+			if (T==1) {
+				Film f= FilmEx.get(0);
+					for(Film e:FilmEx) {
+						if (Filmtree.get(NFilmTest-1).getTitre_Film().equals(e.getTitre_Film())) {
+						}else {
+							FilmEXN.add(e);
+						}
+					}
+					f.setDemandesFilms(FilmEXN);
+			}else {
+				System.out.println("Merci d'avoir choisi le bon numéro ");
 			}
 		}else {
-			System.out.println("Merci d'avoir choisi le bon numéro ");
+			System.out.println("Merci de ne pas supprimer des film ^_^ ");
 		}
-		this.ConsulterDemandesFilms();
 	}
-	
+
 	public void ValiderLaMiseAJour() {
-		
+		ArrayList<DVD> dvd = new  ArrayList();
+		AL2000 Al = new AL2000(2,"kk","dd");
+		dvd= Al.GetLaListeDVDExist();
+		dvd.get(0).SerializableMiseAJourDVD();
+		System.out.println("------ Votre Mise A jour Terminé---- ");
 	}
-	
-	
+
+
 	public int RécupérerNombreDVDLouerAc() {
 		ArrayList<Location> Loca = new  ArrayList();
 		Location L = new Location();
 		Loca = L.GetAllLocations();
-		System.out.println("les location sont"+Loca);
 		int Quantite =0 ;
 		for(Location e:Loca) {
-			if(e.getDate_Rendu()==null) {
+			if(e.getDate_Rendu()== null) {
 				Quantite= Quantite+1;
 			}
 		}
-		return 0;
+		return Quantite;
 	}
+
+	public ArrayList<Location> RécupérerDVDLouerActuelement(){
+		ArrayList<Location> Loca = new  ArrayList();
+		Location L = new Location();
+		Loca = L.GetAllLocations();
+		for(Location e:Loca) {
+			if(e.getDate_Rendu()!= null) {
+				Loca.remove(e);
+			}
+		}
+		DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+				DateFormat.SHORT,
+				DateFormat.SHORT);
+		System.out.println("-------------|------------------------|------------------------|-------------------");
+		System.out.println(" N° Location |   Date de location     |  Le Nom de Client      |   le nom de Film  ");
+		System.out.println("-------------|------------------------|------------------------|-------------------");
+		int a =1;
+		for(Location e:Loca) {
+			System.out.println("     "+e.getNumero_Location()+"       |    "+shortDateFormat.format(e.getDate_Location())+"    |  "+e.getClient().getNom()+"      |   "+e.getDvd().getFilm().getTitre_Film());
+			System.out.println("--------------------------------------------------------------------------------------------");		
+			a++;
+		}
+		return Loca;
+	}
+
+	public void  ConsulterFilmLouéParJour(Date date) {
+		Calendar cal = Calendar.getInstance();
+		Calendar cal1 = Calendar.getInstance();
+		ArrayList<Location> Loca = new  ArrayList();
+		Location L = new Location();
+		Loca = L.GetAllLocations();
+		int cmpt =0;
+		cal.setTime(date);
+
+		for(Location e:Loca) {
+			cal1.setTime(e.getDate_Location());
+			if(cal.get(Calendar.YEAR)==cal1.get(Calendar.YEAR)&&cal.get(Calendar.MONTH)==cal1.get(Calendar.MONTH)&&cal.get(Calendar.DAY_OF_MONTH)==cal1.get(Calendar.DAY_OF_MONTH)) {
+				cmpt++;
+			}
+		}
+		System.out.println("dans cette journée on a loué "+cmpt+" films");
+	}
+	public void  ConsulterFilmLouéParMois(int Année,int mois) {
+		Calendar cal1 = Calendar.getInstance();
+		ArrayList<Location> Loca = new  ArrayList();
+		Location L = new Location();
+		Loca = L.GetAllLocations();
+		int cmpt =0;
+		for(Location e:Loca) {
+			cal1.setTime(e.getDate_Location());
+			if(Année==cal1.get(Calendar.YEAR)&& mois==cal1.get(Calendar.MONTH)) {
+				cmpt++;
+			}
+		}
+		System.out.println("dans cette mois on a loué "+cmpt+" films");
+	}
+	public void  ConsulterFilmLouéParAns(int Année) {
+		Calendar cal1 = Calendar.getInstance();
+		ArrayList<Location> Loca = new  ArrayList();
+		Location L = new Location();
+		Loca = L.GetAllLocations();
+		int cmpt =0;
+		for(Location e:Loca) {
+			cal1.setTime(e.getDate_Location());
+			if(Année==cal1.get(Calendar.YEAR)) {
+				cmpt++;
+			}
+		}
+		System.out.println("dans cette mois on a loué "+cmpt+" films");
+	}
+
+
+
+
+
 	public void AjouterDVD(ArrayList<DVD> Ldvd,DVD newDVD){
 		int QTTdvd=0;
 		for(DVD dvd : Ldvd) {                   
