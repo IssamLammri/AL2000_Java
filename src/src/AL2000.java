@@ -1,0 +1,110 @@
+package src;
+
+import java.util.ArrayList;
+
+public class AL2000 {
+
+	private int num_machine;
+	private String ville;
+	private String Adresse;
+
+	/**
+	 * @param num_machine
+	 * @param ville
+	 * @param adresse
+	 */
+	public AL2000(int num_machine, String ville, String adresse) {
+		super();
+		this.num_machine = num_machine;
+		this.ville = ville;
+		Adresse = adresse;
+	}
+
+	/**
+	 * @return the num_machine
+	 */
+	public int getNum_machine() {
+		return num_machine;
+	}
+
+	/**
+	 * @param num_machine the num_machine to set
+	 */
+	public void setNum_machine(int num_machine) {
+		this.num_machine = num_machine;
+	}
+
+	/**
+	 * @return the ville
+	 */
+	public String getVille() {
+		return ville;
+	}
+
+	/**
+	 * @param ville the ville to set
+	 */
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	/**
+	 * @return the adresse
+	 */
+	public String getAdresse() {
+		return Adresse;
+	}
+
+	/**
+	 * @param adresse the adresse to set
+	 */
+	public void setAdresse(String adresse) {
+		Adresse = adresse;
+	}
+
+	public int GetNombreDVDTotal() {
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDExist =D.GetAlldvd();
+		int Quantite =0;
+		for(DVD e:DVDExist) {
+			if(e.isExiste()) {
+				Quantite= Quantite+e.getQuantite();
+			}
+		}
+
+		return Quantite;
+	}
+	public  ArrayList<DVD> GetLaListeDVDExist(){
+		ArrayList<DVD> DVDAll = new  ArrayList();
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDAll =D.GetAlldvd();
+		System.out.println("---------|--------- |------------------------|");
+		System.out.println(" N° DVD  | Quantité |  Le Nom de Film        |");
+		System.out.println("---------|--------- |------------------------|");
+		int a =1;
+		for(DVD e:DVDAll) {
+			if(e.isExiste()) {
+				DVDExist.add(e);
+				System.out.println("    "+a+"    |     "+e.getQuantite()+"   |  "+e.getFilm().getTitre_Film()+"        ");
+				System.out.println("---------|--------- |------------------------|");		
+				
+				a++;
+			}
+			
+		}
+
+		return DVDExist;
+	}
+	public  ArrayList<DVD> GetMiseAjour(){
+		ArrayList<DVD> DVDExist = new  ArrayList();
+		DVD D = new DVD();
+		DVDExist =D.GetAllMiseAJourdvd();
+		
+
+		return DVDExist;
+	}
+	
+
+}
